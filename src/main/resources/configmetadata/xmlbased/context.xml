@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	
+	<bean id="mailUtils" class="com.sample.configmetadata.xmlbased.utils.MailUtils"/>
+	
+	<bean id="pdfreports" class="com.sample.configmetadata.xmlbased.services.PDFReportGeneratorService">
+		<constructor-arg value="150" />
+		<constructor-arg index="1" value="2024-Jan-01"/>
+		<constructor-arg type="java.lang.String" value="2024-Jan-02"/>
+		
+		<constructor-arg>
+			<list>
+				<value>SalesReport</value>
+				<value>Sales Manager Details</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<map>
+				<entry key="Author" value="test"/>
+				<entry key="Department" value="Sales"/>
+			</map>
+		</constructor-arg>
+		<constructor-arg ref="mailUtils" />
+	</bean>
+</beans>

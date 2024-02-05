@@ -24,7 +24,7 @@ public class ReportGeneratorClient {
 
 		// Using BeanFactory
 		Resource res = new FileSystemResource("src/main/resources/containers/xmlbean-container-context.xml");
-	//	ClassPathResource res = new ClassPathResource("containers/xmlbean-container-context.xml");
+		//ClassPathResource res = new ClassPathResource("containers/xmlbean-container-context.xml");
 		BeanFactory beanContext = new XmlBeanFactory(res);
 		System.out.println("BeanFactory Initialized !!");
 
