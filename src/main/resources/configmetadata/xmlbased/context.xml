@@ -3,14 +3,23 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	
-	<bean id="mailUtils" class="com.sample.configmetadata.xmlbased.utils.MailUtils"/>
-	
-	<bean id="pdfreports" class="com.sample.configmetadata.xmlbased.services.PDFReportGeneratorService">
+
+	<bean id="mailUtils"
+		class="com.sample.configmetadata.xmlbased.utils.MailUtils" />
+
+	<bean id="reportPathUtils"
+		class="com.sample.configmetadata.xmlbased.utils.ReportPathUtil" />
+
+
+	<!-- EXAMPLE of CONSTRUCTOR DEPENDECNY INJECTION IN XML CONFIG METADATA -->
+	<bean id="pdfreports"
+		class="com.sample.configmetadata.xmlbased.services.PDFReportGeneratorService"
+		autowire="byType">
 		<constructor-arg value="150" />
-		<constructor-arg index="1" value="2024-Jan-01"/>
-		<constructor-arg type="java.lang.String" value="2024-Jan-02"/>
-		
+		<constructor-arg index="1" value="2024-Jan-01" />
+		<constructor-arg type="java.lang.String"
+			value="2024-Jan-02" />
+
 		<constructor-arg>
 			<list>
 				<value>SalesReport</value>
@@ -19,10 +28,47 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		</constructor-arg>
 		<constructor-arg>
 			<map>
-				<entry key="Author" value="test"/>
-				<entry key="Department" value="Sales"/>
+				<entry key="Author" value="test" />
+				<entry key="Department" value="Sales" />
 			</map>
 		</constructor-arg>
 		<constructor-arg ref="mailUtils" />
+	</bean>
+
+	<!-- EXAMPLE of SETTER DEPENDECNY INJECTION IN XML CONFIG METADATA -->
+	<bean id="xmlreports"
+		class="com.sample.configmetadata.xmlbased.services.XMLReportGeneratorService"
+		autowire="byName">
+		<property name="recordsPerPage" value="150" />
+
+		<!-- Attribute 'index' is not allowed to appear in element 'property'. -->
+		<!-- Attribute 'type' is not allowed to appear in element 'property'. -->
+		<property name="recordStartDate" value="2024-Jan-01" />
+		<property name="recordEndDate" value="2024-Jan-02" />
+
+		<property name="reportDetails">
+			<list>
+				<value>SalesReport</value>
+				<value>Sales Manager Details</value>
+			</list>
+		</property>
+		<property name="reportAdditionalDetails">
+			<map>
+				<entry key="Author" value="test" />
+				<entry key="Department" value="Sales" />
+			</map>
+		</property>
+
+		<!-- <property name="mailUtils" ref="mailUtils" /> -->
+		<!-- This can also be used as inner beans -->
+		<property name="mailUtils">
+			<bean class="com.sample.configmetadata.xmlbased.utils.MailUtils" />
+		</property>
+	</bean>
+
+	<!-- EXAMPLE AutoWiring by Constructor -->
+	<bean id="generalreports"
+		class="com.sample.configmetadata.xmlbased.services.GenericReportGeneratorService"
+		autowire="constructor">
 	</bean>
 </beans>
