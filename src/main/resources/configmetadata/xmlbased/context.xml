@@ -4,71 +4,81 @@
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 
-	<bean id="mailUtils"
-		class="com.sample.configmetadata.xmlbased.utils.MailUtils" />
+	<bean id="dependencyUtilA"
+		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilA" />
 
-	<bean id="reportPathUtils"
-		class="com.sample.configmetadata.xmlbased.utils.ReportPathUtil" />
+	<bean id="dependencyUtilB"
+		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilB" />
+		
+		
+		
+	<bean id="dependencyUtilSingleton"
+		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilSingleton" scope="singleton"/>
+
+	<bean id="dependencyUtilPrototype"
+		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilPrototype" scope="prototype"/>
 
 
 	<!-- EXAMPLE of CONSTRUCTOR DEPENDECNY INJECTION IN XML CONFIG METADATA -->
-	<bean id="pdfreports"
-		class="com.sample.configmetadata.xmlbased.services.PDFReportGeneratorService"
-		autowire="byType">
-		<constructor-arg value="150" />
-		<constructor-arg index="1" value="2024-Jan-01" />
+	<bean id="constructorDI" class="com.sample.configmetadata.xmlbased.services.ConstructorDIService" autowire="byType" init-method="init" destroy-method="destroy">
+		<constructor-arg value="1" />
+		<constructor-arg index="1" value="String 1" />
 		<constructor-arg type="java.lang.String"
-			value="2024-Jan-02" />
+			value="String 2" />
 
 		<constructor-arg>
 			<list>
-				<value>SalesReport</value>
-				<value>Sales Manager Details</value>
+				<value>List Value 1</value>
+				<value>List Value 2</value>
 			</list>
 		</constructor-arg>
 		<constructor-arg>
 			<map>
-				<entry key="Author" value="test" />
-				<entry key="Department" value="Sales" />
+				<entry key="Key 1" value="Value 1" />
+				<entry key="Key 2" value="Value 2" />
 			</map>
 		</constructor-arg>
-		<constructor-arg ref="mailUtils" />
+		<constructor-arg ref="dependencyUtilA" />
+		<constructor-arg ref="dependencyUtilPrototype"/>
+		<constructor-arg ref="dependencyUtilSingleton"/>
 	</bean>
 
 	<!-- EXAMPLE of SETTER DEPENDECNY INJECTION IN XML CONFIG METADATA -->
-	<bean id="xmlreports"
-		class="com.sample.configmetadata.xmlbased.services.XMLReportGeneratorService"
-		autowire="byName">
-		<property name="recordsPerPage" value="150" />
+	<bean id="setterDI" class="com.sample.configmetadata.xmlbased.services.SetterDIService" autowire="byName">
+		<property name="intField" value="150" />
 
 		<!-- Attribute 'index' is not allowed to appear in element 'property'. -->
 		<!-- Attribute 'type' is not allowed to appear in element 'property'. -->
-		<property name="recordStartDate" value="2024-Jan-01" />
-		<property name="recordEndDate" value="2024-Jan-02" />
+		<property name="stringField1" value="String 1" />
+		<property name="stringField2" value="String 2" />
 
-		<property name="reportDetails">
+		<property name="listField">
 			<list>
-				<value>SalesReport</value>
-				<value>Sales Manager Details</value>
+				<value>List Value 1</value>
+				<value>List Value 2</value>
 			</list>
 		</property>
-		<property name="reportAdditionalDetails">
+		<property name="mapField">
 			<map>
-				<entry key="Author" value="test" />
-				<entry key="Department" value="Sales" />
+				<entry key="Key 1" value="Value 1" />
+				<entry key="Key 2" value="Value 2" />
 			</map>
 		</property>
 
-		<!-- <property name="mailUtils" ref="mailUtils" /> -->
+		<!-- <property name=""dependencyUtilA"" ref=""dependencyUtilA"" /> -->
 		<!-- This can also be used as inner beans -->
-		<property name="mailUtils">
-			<bean class="com.sample.configmetadata.xmlbased.utils.MailUtils" />
+		<property name="dependencyUtilA">
+			<bean class="com.sample.configmetadata.xmlbased.utils.DependencyUtilA"/>
 		</property>
+		
+		<property name="dependencyUtilPrototype" ref="dependencyUtilPrototype" />
+		<property name="dependencyUtilSingleton" ref="dependencyUtilSingleton" />
+		
 	</bean>
 
 	<!-- EXAMPLE AutoWiring by Constructor -->
-	<bean id="generalreports"
-		class="com.sample.configmetadata.xmlbased.services.GenericReportGeneratorService"
+	<bean id="autowirebyConstructor"
+		class="com.sample.configmetadata.xmlbased.services.AutowirebyConstructor"
 		autowire="constructor">
 	</bean>
 </beans>
