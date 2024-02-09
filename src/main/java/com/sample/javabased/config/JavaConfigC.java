@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.sample.javabased.services.DependencyInjectionService;
 import com.sample.javabased.utils.DependencyUtilB;
 
 //This class is replacement of XML
 @Configuration
-public class JavaConfigB {
+public class JavaConfigC {
 
 	@Value("This is a Secondary Bean Conif Class Response")
 	private String stringField1;
@@ -23,10 +22,4 @@ public class JavaConfigB {
 		return new DependencyUtilB();
 	}
 
-	
-	@Bean(name = "diService")
-	public DependencyInjectionService diService() {
-		System.out.println("This is called when profile - test2 is called");
-		return null;
-	}
 }

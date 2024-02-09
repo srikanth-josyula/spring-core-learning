@@ -34,17 +34,19 @@ public class SetterDIService {
 		System.out.println("Printing Setter DI int Field " + intField);
 		System.out.println("Printing Setter DI String Field 1 " + stringField1);
 		System.out.println("Printing Setter DI String Field 2 " + stringField2);
-
+		System.out.println();
 		System.out.println("Printing Setter DI List Field  " + listField);
 		System.out.println("Printing Setter DI Map Field  ");
 		for (Entry<String, String> map : mapField.entrySet()) {
-			System.out.println(map.getKey() + "=" + map.getValue());
+			System.out.println("    "+map.getKey() + "=" + map.getValue());
 		}
-
+		System.out.println();
+		System.out.println("--------- Bean Scopes Memory Test 1 -------");
 		System.out.println("Printing Setter DI Dependency Bean A " + dependencyUtilA.somePrint());
 		System.out.println("Printing Setter DI Dependency Bean B " + dependencyUtilB.somePrint());
 		
-		
+		System.out.println();
+		System.out.println("--------- Bean Scopes Memory Test 2 -------");
 		System.out.println("Printing Setter DI Prototype Scope Bean Memory " + dependencyUtilPrototype.hashCode());
 		System.out.println("Printing Setter DI Singleton Scope Bean Memory " + dependencyUtilSingleton.hashCode());
 	}

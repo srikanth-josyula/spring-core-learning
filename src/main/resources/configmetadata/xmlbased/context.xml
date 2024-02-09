@@ -3,24 +3,33 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+	<!-- Normally, you will split a large Spring XML bean files into multiple 
+		small files, group by module or category, to make things more maintainable 
+		and modular. For example,
+		 <import resource="config/customer.xml" /> <import 
+		resource="config/scheduler.xml" /> -->
 
 	<bean id="dependencyUtilA"
 		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilA" />
 
 	<bean id="dependencyUtilB"
 		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilB" />
-		
-		
-		
+
+
+
 	<bean id="dependencyUtilSingleton"
-		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilSingleton" scope="singleton"/>
+		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilSingleton"
+		scope="singleton" />
 
 	<bean id="dependencyUtilPrototype"
-		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilPrototype" scope="prototype"/>
+		class="com.sample.configmetadata.xmlbased.utils.DependencyUtilPrototype"
+		scope="prototype" />
 
 
 	<!-- EXAMPLE of CONSTRUCTOR DEPENDECNY INJECTION IN XML CONFIG METADATA -->
-	<bean id="constructorDI" class="com.sample.configmetadata.xmlbased.services.ConstructorDIService" autowire="byType" init-method="init" destroy-method="destroy">
+	<bean id="constructorDI"
+		class="com.sample.configmetadata.xmlbased.services.ConstructorDIService"
+		autowire="byType" init-method="init" destroy-method="destroy">
 		<constructor-arg value="1" />
 		<constructor-arg index="1" value="String 1" />
 		<constructor-arg type="java.lang.String"
@@ -39,12 +48,14 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			</map>
 		</constructor-arg>
 		<constructor-arg ref="dependencyUtilA" />
-		<constructor-arg ref="dependencyUtilPrototype"/>
-		<constructor-arg ref="dependencyUtilSingleton"/>
+		<constructor-arg ref="dependencyUtilPrototype" />
+		<constructor-arg ref="dependencyUtilSingleton" />
 	</bean>
 
 	<!-- EXAMPLE of SETTER DEPENDECNY INJECTION IN XML CONFIG METADATA -->
-	<bean id="setterDI" class="com.sample.configmetadata.xmlbased.services.SetterDIService" autowire="byName">
+	<bean id="setterDI"
+		class="com.sample.configmetadata.xmlbased.services.SetterDIService"
+		autowire="byName">
 		<property name="intField" value="150" />
 
 		<!-- Attribute 'index' is not allowed to appear in element 'property'. -->
@@ -68,12 +79,15 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<!-- <property name=""dependencyUtilA"" ref=""dependencyUtilA"" /> -->
 		<!-- This can also be used as inner beans -->
 		<property name="dependencyUtilA">
-			<bean class="com.sample.configmetadata.xmlbased.utils.DependencyUtilA"/>
+			<bean
+				class="com.sample.configmetadata.xmlbased.utils.DependencyUtilA" />
 		</property>
-		
-		<property name="dependencyUtilPrototype" ref="dependencyUtilPrototype" />
-		<property name="dependencyUtilSingleton" ref="dependencyUtilSingleton" />
-		
+
+		<property name="dependencyUtilPrototype"
+			ref="dependencyUtilPrototype" />
+		<property name="dependencyUtilSingleton"
+			ref="dependencyUtilSingleton" />
+
 	</bean>
 
 	<!-- EXAMPLE AutoWiring by Constructor -->

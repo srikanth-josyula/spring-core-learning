@@ -46,30 +46,32 @@ public class ConstructorDIService {
 	}
 	
 	public void init() {
-		System.out.println("This is the init methood");
+		System.out.println("-----------init() method : Initialized. ------------");
 	}
 
 	public void getResponse() {
 		System.out.println("Printing Constructor DI int Field " + intField);
 		System.out.println("Printing Constructor DI String Field 1 " + stringField1);
 		System.out.println("Printing Constructor DI String Field 2 " + stringField2);
-
+		System.out.println();
 		System.out.println("Printing Constructor DI List Field  " + listField);
 		System.out.println("Printing Constructor DI Map Field  ");
 		for (Entry<String, String> map : mapField.entrySet()) {
-			System.out.println(map.getKey() + "=" + map.getValue());
+			System.out.println("    "+map.getKey() + "=" + map.getValue());
 		}
-
+		System.out.println();
+		System.out.println("--------- Bean Scopes Memory Test 1 -------");
 		System.out.println("Printing Constructor DI Dependency Bean A " + dependencyUtilA.somePrint());
 		System.out.println("Printing Constructor DI Dependency Bean B " + autowirebytype.somePrint());
 		
-		
+		System.out.println();
+		System.out.println("--------- Bean Scopes Memory Test 2 -------");
 		System.out.println("Printing Constructor DI Prototype Scope Bean Memory " + dependencyUtilPrototype.hashCode());
 		System.out.println("Printing Constructor DI Singleton Scope Bean Memory " + dependencyUtilSingleton.hashCode());
 	}
 	
 	public void destroy() {
-		System.out.println("This is the destroy methood");
+		System.out.println("-----------destroy() method : Closed. ------------");
 	}
 
 }

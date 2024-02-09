@@ -17,16 +17,16 @@ public class Client {
 			context= new ClassPathXmlApplicationContext("configmetadata/xmlbased/context.xml");
 			System.out.println("ApplicationContext Initialized !!");
 
-			System.out.println("## Using the Constructor DI Concepts ##");
+			System.out.println("##---- Using the Constructor DI Concepts ----##");
 			ConstructorDIService constructorDI = (ConstructorDIService) context.getBean("constructorDI");
 			constructorDI.getResponse();
 			
-			System.out.println("## Using the Setter DI Concepts ##");
+			System.out.println("##----  Using the Setter DI Concepts ----##");
 			SetterDIService setterDI = (SetterDIService) context.getBean("setterDI");
 			setterDI.getResponse();
 			
 			
-			System.out.println("## Using the Constructor autowiring Concepts ##");
+			System.out.println("##----  Using the Constructor autowiring Concepts ----##");
 			AutowirebyConstructor autowirebyConstructor = (AutowirebyConstructor) context.getBean("autowirebyConstructor");
 			autowirebyConstructor.getResponse();
 			
