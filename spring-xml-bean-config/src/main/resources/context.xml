@@ -1,20 +1,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
 	<!-- Normally, you will split a large Spring XML bean files into multiple 
 		small files, group by module or category, to make things more maintainable 
 		and modular. For example,
 		 <import resource="config/customer.xml" /> <import 
 		resource="config/scheduler.xml" /> -->
+	
 	<!-- These are the beans for Dependency Injection-->
 	<bean id="dependencyUtilA" class="com.sample.utils.DependencyUtilA" />
 	<bean id="dependencyUtilB" class="com.sample.utils.DependencyUtilB" />
+	
 	<!-- Spring Bean Scopes-->
 	<bean id="dependencyUtilSingleton" class="com.sample.utils.DependencyUtilSingleton" scope="singleton" />
 	<bean id="dependencyUtilPrototype" class="com.sample.utils.DependencyUtilPrototype" scope="prototype" />
+	
 	<!-- EXAMPLE of CONSTRUCTOR DEPENDECNY INJECTION IN XML CONFIG METADATA -->
 	<bean id="constructorDI" class="com.sample.services.ConstructorDIService"
-		autowire="byType" init-method="init" destroy-method="destroy">
+		autowire="byType" init-method="init" destroy-method="destroy" lazy-init="true">
 		<constructor-arg value="1" />
 		<constructor-arg index="1" value="String 1" />
 		<constructor-arg type="java.lang.String" value="String 2" />
@@ -32,12 +36,12 @@
 		</constructor-arg>
 		<!-- This is the default mode, you need to wire your bean via ‘ref’ attribute. -->
 		<constructor-arg ref="dependencyUtilA" />
-		s
 		<constructor-arg ref="dependencyUtilPrototype" />
 		<constructor-arg ref="dependencyUtilSingleton" />
 	</bean>
+	
 	<!-- EXAMPLE of SETTER DEPENDECNY INJECTION IN XML CONFIG METADATA -->
-	<bean id="setterDI" class="com.sample.services.SetterDIService" autowire="byName">
+	<bean id="setterDI" class="com.sample.services.SetterDIService" autowire="byName" lazy-init="false">
 		<property name="intField" value="150" />
 		<!-- Attribute 'index' is not allowed to appear in element 'property'. -->
 		<!-- Attribute 'type' is not allowed to appear in element 'property'. -->
@@ -63,6 +67,7 @@
 		<property name="dependencyUtilPrototype" ref="dependencyUtilPrototype" />
 		<property name="dependencyUtilSingleton" ref="dependencyUtilSingleton" />
 	</bean>
+	
 	<!-- EXAMPLE AutoWiring by Constructor -->
 	<!-- Auto-wire a bean by property data type in constructor argument. In this case, since the data type of bean is same as the constructor argument data type in-->
 	<bean id="autowirebyConstructor" class="com.sample.services.AutowirebyConstructor" autowire="constructor"></bean>
