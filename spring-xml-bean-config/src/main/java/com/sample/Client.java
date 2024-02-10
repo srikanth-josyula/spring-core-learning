@@ -18,16 +18,16 @@ public class Client {
 			context= new ClassPathXmlApplicationContext("context.xml");
 			System.out.println("ApplicationContext Initialized !!");
 
-			System.out.println("##---- Using the Constructor DI Concepts ----##");
+			System.out.println("\n##---- Using the Constructor DI Concepts ----##");
 			ConstructorDIService constructorDI = (ConstructorDIService) context.getBean("constructorDI");
 			constructorDI.getResponse();
 			
-			System.out.println("##----  Using the Setter DI Concepts ----##");
+			System.out.println("\n##----  Using the Setter DI Concepts ----##");
 			SetterDIService setterDI = (SetterDIService) context.getBean("setterDI");
 			setterDI.getResponse();
 			
 			
-			System.out.println("##----  Using the Constructor autowiring Concepts ----##");
+			System.out.println("\n##----  Using the Constructor autowiring Concepts ----##");
 			AutowirebyConstructor autowirebyConstructor = (AutowirebyConstructor) context.getBean("autowirebyConstructor");
 			autowirebyConstructor.getResponse();
 			
@@ -35,7 +35,7 @@ public class Client {
 			e.printStackTrace();
 		}finally {
 			context.close();
-			//used to close if the JVM shuts down
+			//Used to close if the JVM shuts down
 			context.registerShutdownHook();
 		}
 	}

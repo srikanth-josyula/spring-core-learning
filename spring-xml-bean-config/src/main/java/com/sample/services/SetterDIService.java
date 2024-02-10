@@ -20,13 +20,16 @@ public class SetterDIService {
 
 	DependencyUtilA dependencyUtilA = null;
 
-	// Injecting using auto-wiring if give by name, name should be same as the name of the bean
+	//Auto wiring by property name. If the name of a bean is same as the name of other bean property, auto wire it.
+	//Here the dependencyUtilB should be same as dependencyUtilB as of in context.xml
+	//We need to have setters as we are not explicitly sending in context.xml
 	DependencyUtilB dependencyUtilB = null;
 
 	public void setReportPathUtils(DependencyUtilB dependencyUtilB) {
 		this.dependencyUtilB = dependencyUtilB;
 	}
 
+	//Beans for Scopes
 	DependencyUtilPrototype dependencyUtilPrototype = null;
 	DependencyUtilSingleton dependencyUtilSingleton = null;
 

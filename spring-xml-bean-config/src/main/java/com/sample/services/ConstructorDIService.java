@@ -12,23 +12,27 @@ import com.sample.utils.DependencyUtilSingleton;
 
 public class ConstructorDIService {
 
+	// Injection on fields
 	int intField;
 	String stringField1;
 	String stringField2;
 	List<String> listField;
 	Map<String, String> mapField;
 
+	
+	// Injection of beans
 	DependencyUtilA dependencyUtilA = null;
 
-	// Injecting using auto-wiring if give by Type only the TYPE is considered the
-	// name here is different from the bean name
-	// Bean name is not autowirebytype, but still it works
+	//Auto wiring by property data type. If data type of a bean is compatible with the data type of other bean property, auto wire it.
+	//Here the autowirebytype is not the same as dependencyUtilB as of in context.xml
+	//We need to have setters as we are not explicitly sending in context.xml
 	DependencyUtilB autowirebytype = null;
 
 	public void setReportPathUtils(DependencyUtilB autowirebytype) {
 		this.autowirebytype = autowirebytype;
 	}
 	
+	//Beans for Scopes
 	DependencyUtilPrototype dependencyUtilPrototype = null;
 	DependencyUtilSingleton dependencyUtilSingleton = null;
 
