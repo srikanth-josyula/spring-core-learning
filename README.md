@@ -19,6 +19,6 @@ This repository covers various topics ranging from dependency injection to bean 
 Each topic is demonstrated with relevant examples in the Spring XML configuration files and corresponding Java classes along with Java configuration Container.
 
 ```bash
-git clone https://github.com/your-username/spring-core-beans-learning.git
+git clone https://github.com/srikanth-josyula/spring-core-beans-learning.git
 cd spring-core-beans-learning
 mvn clean install
