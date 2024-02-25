@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- This used the javabased configurations to pick the anntations -->
+	<context:annotation-config/>
+	<context:component-scan base-package="com.sample.config" />
+	
+	
+	<!-- EXAMPLE of SETTER DEPENDECNY INJECTION IN XML CONFIG METADATA -->
+	<bean id="setterDI" class="com.sample.services.SetterDIService" autowire="byName" lazy-init="false">
+		<property name="intField" value="150" />
+		<!-- Attribute 'index' is not allowed to appear in element 'property'. -->
+		<!-- Attribute 'type' is not allowed to appear in element 'property'. -->
+		<property name="stringField1" value="String 1" />
+		<property name="stringField2" value="String 2" />
+		<property name="listField">
+			<list>
+				<value>List Value 1</value>
+				<value>List Value 2</value>
+			</list>
+		</property>
+		<property name="mapField">
+			<map>
+				<entry key="Key 1" value="Value 1" />
+				<entry key="Key 2" value="Value 2" />
+			</map>
+		</property>
+		<!-- <property name=""dependencyUtilA"" ref=""dependencyUtilA"" /> -->
+		<!-- This can also be used as inner beans -->
+		<property name="dependencyUtilA">
+			<bean class="com.sample.utils.DependencyUtilA" />
+		</property>
+	</bean>
+
+	<!-- These are the beans for Dependency Injection-->
+	<bean id="dependencyUtilA" class="com.sample.utils.DependencyUtilA" />
+	<bean id="dependencyUtilB" class="com.sample.utils.DependencyUtilB" />
+</beans>
